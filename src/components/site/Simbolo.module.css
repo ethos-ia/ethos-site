@@ -1,0 +1,9 @@
+.simbolo {
+  display: inline-block;
+  flex: none;
+  width: 1.15em;
+  aspect-ratio: 84 / 74;
+  background: currentColor;
+  -webkit-mask: url("/marca/simbolo.svg") center / contain no-repeat;
+  mask: url("/marca/simbolo.svg") center / contain no-repeat;
+}

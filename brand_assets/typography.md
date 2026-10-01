@@ -1,39 +1,27 @@
-# Tipografia — Ethos
+# Tipografia — ethos
 
-Inspirada nas fontes customizadas da Anthropic ("Anthropic Serif" + "Anthropic Sans"),
-adaptadas com equivalentes do Google Fonts.
+Duas famílias no site inteiro, carregadas pelo `next/font` em `src/app/layout.tsx`.
 
-## Fontes
+| Papel | Família | Pesos | Origem |
+|-------|---------|-------|--------|
+| Tudo (títulos, texto, botões) | Satoshi | 500, 700, 900 | Fontshare, arquivos em `src/fonts/` |
+| Rótulos técnicos (índices, medidas, tags) | JetBrains Mono | 400, 500 | Google Fonts |
 
-| Papel | Família | Fonte de referência |
-|-------|---------|---------------------|
-| Heading | Playfair Display | "Anthropic Serif" |
-| Body | Inter | "Anthropic Sans" |
+Variáveis CSS: `--sans` e `--mono` (utilitários `font-sans` e `font-mono`).
 
-## Uso no código
-
-```tsx
-// heading (serif)
-className="font-heading"
-
-// body (sans-serif — padrão, não precisa declarar)
-className="font-body"
-```
-
-## Escala tipográfica recomendada
+## Escala usada
 
 | Elemento | Tamanho | Peso | Letter-spacing |
 |----------|---------|------|----------------|
-| H1 hero | 56-72px | 700 | -0.03em |
-| H2 seção | 36-48px | 400 (Playfair) | -0.02em |
-| H3 | 24-30px | 600 | -0.01em |
-| Body | 18-20px | 400 | normal |
-| Small/muted | 14-16px | 400 | normal |
+| Título do topo | min(12.6vw, 20.5vh, 184px) | 900 | -0.052em |
+| Título de seção | clamp(38px, 4.6vw, 68px) | 900 | -0.045em |
+| Título de item | 26 a 46px | 700 | -0.03em |
+| Texto corrido | 17 a 21px | 500 | normal |
+| Rótulo mono | 12 a 13,5px | 400/500 | 0.06 a 0.12em, caixa alta |
 
-## Princípios
+## Marca
 
-- Headings grandes: Playfair Display (cria contraste editorial com o body)
-- Corpo de texto: Inter (limpo, legível, moderno)
-- Máximo 2 famílias no projeto inteiro
-- Line-height generoso no body: 1.6–1.8
-- Tracking negativo em headings grandes para densidade visual
+- Nome sempre em minúsculas: **ethos**, em Satoshi Bold, com o símbolo laranja à esquerda (espaço de 0,22em).
+- Símbolo: `brand_assets/logo.svg` (mestre) e `public/marca/simbolo.svg` (recortado, usado como máscara no site).
+- Assinatura: "Inteligência sob medida." Manifesto: "Cada problema pede a sua solução."
+- Nunca usar travessão em texto do site.

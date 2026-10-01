@@ -1,0 +1,92 @@
+.rodape {
+  padding: 88px 0 32px;
+  background: var(--carvao);
+  color: var(--areia);
+}
+
+.grade {
+  display: grid;
+  grid-template-columns: 5fr 2fr 3fr 2fr;
+  gap: 40px;
+  padding-bottom: 64px;
+}
+
+.assinatura {
+  margin-top: 20px;
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: -0.02em;
+}
+
+.posicao {
+  margin-top: 6px;
+  font-size: 15px;
+  color: var(--pedra-clara);
+}
+
+.rotulo {
+  margin-bottom: 14px;
+  font-family: var(--mono);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pedra-clara);
+}
+
+.grade > nav a,
+.grade > div:not(.marca) a {
+  display: block;
+  padding: 5px 0;
+  font-size: 15px;
+  color: #d9d0c1;
+  transition: color 0.2s;
+}
+
+.grade > nav a:hover,
+.grade > div:not(.marca) a:hover {
+  color: var(--laranja);
+}
+
+.grade a:focus-visible,
+.base button:focus-visible {
+  outline: 2px solid var(--laranja);
+  outline-offset: 4px;
+}
+
+.base {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 16px;
+  /* respiro à direita para a bolha do chat não cobrir o link de cookies */
+  padding: 24px 80px 0 0;
+  border-top: 1px solid var(--linha);
+  font-size: 13px;
+  color: var(--pedra-clara);
+}
+
+.base button {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.base button:hover {
+  color: var(--areia);
+}
+
+@media (max-width: 760px) {
+  .grade {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .marca {
+    grid-column: 1 / -1;
+  }
+}

@@ -1,0 +1,84 @@
+.secao {
+  position: relative;
+  padding: clamp(88px, 10vw, 144px) 0;
+  background: var(--areia);
+  color: var(--carvao);
+}
+
+.frentes {
+  border-top: 1.5px solid var(--carvao);
+}
+
+.frente {
+  display: grid;
+  grid-template-columns: 6fr 6fr 3fr;
+  align-items: baseline;
+  gap: 40px;
+  padding: 40px 0;
+  border-bottom: 1px solid var(--areia-linha);
+}
+
+.frente h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.42em;
+  font-weight: 700;
+  font-size: clamp(28px, 3vw, 42px);
+  line-height: 1;
+  letter-spacing: -0.035em;
+}
+
+.frente h3 i {
+  flex: none;
+  width: 0.3em;
+  height: 0.3em;
+  border-radius: 0.08em;
+  background: var(--laranja);
+}
+
+.frente p {
+  max-width: 42ch;
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 1.5;
+  color: var(--tinta);
+}
+
+.frente a {
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--pedra);
+  transition: color 0.2s;
+}
+
+.frente a:hover {
+  color: var(--laranja-texto);
+}
+
+.frente a:focus-visible {
+  outline: 2px solid var(--laranja);
+  outline-offset: 4px;
+}
+
+.seta {
+  width: 14px;
+  height: 14px;
+}
+
+@media (max-width: 760px) {
+  .frente {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 28px 0;
+  }
+
+  .frente a {
+    justify-self: start;
+  }
+}

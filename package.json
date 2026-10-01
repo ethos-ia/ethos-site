@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.98.0",
-    "@paper-design/shaders-react": "^0.0.76",
     "@splinetool/runtime": "^1.12.88",
     "@splinetool/viewer": "^1.12.92",
     "clsx": "^2.1.1",

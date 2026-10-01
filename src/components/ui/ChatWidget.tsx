@@ -27,10 +27,10 @@ function getOrCreateContactId(): string {
   }
 }
 
-// Superficies derivadas da paleta Ethos (carvao/azul). Mantidas em hex para
-// controlar a elevacao do painel sobre o fundo carvao do site.
-const PANEL_BG = "#1B2430";
-const BOT_BUBBLE = "#2A3644";
+// Superfícies da paleta ethos (carvão). Mantidas em hex para controlar a
+// elevação do painel sobre as seções escuras do site.
+const PANEL_BG = "#1C1B19";
+const BOT_BUBBLE = "#2A2825";
 
 export function ChatWidget() {
   const { open: openContact } = useContact();
@@ -124,7 +124,7 @@ export function ChatWidget() {
         {
           role: "assistant",
           content:
-            "Tive um problema para responder agora. Voce pode tentar de novo em instantes ou falar com a Ethos pelo formulario de contato.",
+            "Tive um problema para responder agora. Você pode tentar de novo em instantes ou falar com a ethos pelo formulário de contato.",
         },
       ]);
     } finally {
@@ -145,9 +145,9 @@ export function ChatWidget() {
       <motion.button
         type="button"
         onClick={toggle}
-        aria-label={open ? "Fechar conversa" : "Abrir conversa com a Ethos"}
+        aria-label={open ? "Fechar conversa" : "Abrir conversa com a ethos"}
         aria-expanded={open}
-        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full flex items-center justify-center text-ambar border border-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ambar"
+        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full flex items-center justify-center text-laranja border border-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-laranja"
         style={{
           backgroundColor: PANEL_BG,
           boxShadow: "0 8px 24px -8px rgba(0,0,0,0.55), 0 2px 8px -2px rgba(0,0,0,0.4)",
@@ -206,12 +206,12 @@ export function ChatWidget() {
             {/* Header */}
             <div className="flex items-center gap-3 px-5 py-4 border-b border-white/8">
               <span className="relative flex w-2 h-2">
-                <span className="absolute inline-flex w-full h-full rounded-full bg-ambar opacity-60 animate-ping" />
-                <span className="relative inline-flex w-2 h-2 rounded-full bg-ambar" />
+                <span className="absolute inline-flex w-full h-full rounded-full bg-laranja opacity-60 animate-ping" />
+                <span className="relative inline-flex w-2 h-2 rounded-full bg-laranja" />
               </span>
               <div className="leading-tight">
                 <p className="text-sm font-bold text-areia">{AGENT_NAME}</p>
-                <p className="text-[0.7rem] text-nevoa">{AGENT_TAGLINE}</p>
+                <p className="text-[0.7rem] text-pedra-clara">{AGENT_TAGLINE}</p>
               </div>
             </div>
 
@@ -230,8 +230,8 @@ export function ChatWidget() {
                     className="max-w-[85%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed whitespace-pre-wrap"
                     style={
                       m.role === "user"
-                        ? { backgroundColor: "#5A7090", color: "#F4EFE8" }
-                        : { backgroundColor: BOT_BUBBLE, color: "#F4EFE8" }
+                        ? { backgroundColor: "#FF6A2B", color: "#141413" }
+                        : { backgroundColor: BOT_BUBBLE, color: "#F2E8D8" }
                     }
                   >
                     {m.content}
@@ -248,7 +248,7 @@ export function ChatWidget() {
                     {[0, 1, 2].map((d) => (
                       <motion.span
                         key={d}
-                        className="w-1.5 h-1.5 rounded-full bg-nevoa"
+                        className="w-1.5 h-1.5 rounded-full bg-pedra-clara"
                         animate={{ opacity: [0.3, 1, 0.3], y: [0, -3, 0] }}
                         transition={{ duration: 1, repeat: Infinity, delay: d * 0.15, ease: "easeInOut" }}
                       />
@@ -262,9 +262,9 @@ export function ChatWidget() {
                   <button
                     type="button"
                     onClick={() => { setOpen(false); openContact(); }}
-                    className="text-xs font-semibold text-ambar underline underline-offset-2 hover:text-areia transition-colors px-1"
+                    className="text-xs font-semibold text-laranja underline underline-offset-2 hover:text-areia transition-colors px-1"
                   >
-                    Abrir formulario de contato
+                    Abrir formulário de contato
                   </button>
                 </div>
               )}
@@ -272,7 +272,7 @@ export function ChatWidget() {
 
             {/* Input */}
             <div className="border-t border-white/8 p-3">
-              <div className="flex items-end gap-2 rounded-xl bg-white/5 border border-white/10 px-3 py-2 focus-within:border-ambar/50 transition-colors">
+              <div className="flex items-end gap-2 rounded-xl bg-white/5 border border-white/10 px-3 py-2 focus-within:border-laranja/50 transition-colors">
                 <textarea
                   ref={inputRef}
                   value={input}
@@ -281,14 +281,14 @@ export function ChatWidget() {
                   rows={1}
                   placeholder="Escreva sua mensagem"
                   aria-label="Sua mensagem"
-                  className="flex-1 bg-transparent resize-none text-sm text-areia placeholder:text-nevoa/60 focus:outline-none max-h-24 leading-relaxed"
+                  className="flex-1 bg-transparent resize-none text-sm text-areia placeholder:text-pedra-clara/70 focus:outline-none max-h-24 leading-relaxed"
                 />
                 <button
                   type="button"
                   onClick={send}
                   disabled={!input.trim() || loading}
                   aria-label="Enviar mensagem"
-                  className="shrink-0 w-8 h-8 rounded-lg flex items-center justify-center bg-ambar text-carvao disabled:opacity-30 disabled:cursor-not-allowed enabled:hover:brightness-110 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ambar"
+                  className="shrink-0 w-8 h-8 rounded-lg flex items-center justify-center bg-laranja text-carvao disabled:opacity-30 disabled:cursor-not-allowed enabled:hover:brightness-110 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-laranja"
                 >
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                     <path d="M4 12l16-8-6 16-3-7-7-1z" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />

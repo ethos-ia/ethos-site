@@ -1,0 +1,97 @@
+.secao {
+  position: relative;
+  padding: clamp(88px, 10vw, 144px) 0;
+  background: var(--carvao);
+  color: var(--areia);
+}
+
+.etapas {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding-top: 56px;
+  list-style: none;
+}
+
+/* Régua: traço a cada 16 px e traço maior a cada 80 px */
+.etapas::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 16px;
+  border-top: 1px solid var(--pedra);
+  background:
+    repeating-linear-gradient(90deg, #55504a 0 1px, transparent 1px 80px) top left / 100% 16px no-repeat,
+    repeating-linear-gradient(90deg, #36332f 0 1px, transparent 1px 16px) top left / 100% 9px no-repeat;
+}
+
+.etapas li {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 14px;
+  padding-right: 32px;
+}
+
+/* Marca laranja na régua onde cada etapa começa */
+.etapas li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -56px;
+  width: 2px;
+  height: 30px;
+  background: var(--laranja);
+}
+
+.numero {
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: var(--laranja);
+}
+
+.etapas h3 {
+  font-weight: 700;
+  font-size: clamp(26px, 2.4vw, 34px);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.etapas p {
+  max-width: 28ch;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--pedra-clara);
+}
+
+@media (max-width: 760px) {
+  .etapas {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding: 0 0 0 40px;
+  }
+
+  /* No celular a régua fica em pé, à esquerda */
+  .etapas::before {
+    right: auto;
+    bottom: 0;
+    width: 16px;
+    height: auto;
+    border-top: 0;
+    border-left: 1px solid var(--pedra);
+    background:
+      repeating-linear-gradient(180deg, #55504a 0 1px, transparent 1px 80px) top left / 16px 100% no-repeat,
+      repeating-linear-gradient(180deg, #36332f 0 1px, transparent 1px 16px) top left / 9px 100% no-repeat;
+  }
+
+  .etapas li::before {
+    left: -40px;
+    top: 6px;
+    width: 30px;
+    height: 2px;
+  }
+}

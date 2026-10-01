@@ -22,7 +22,8 @@ const securityHeaders = [
     key: "Permissions-Policy",
     value: [
       "accelerometer=()",
-      "autoplay=()",
+      // o filme do topo toca sozinho (mudo); autoplay=() bloquearia
+      "autoplay=(self)",
       "camera=()",
       "display-capture=()",
       "encrypted-media=()",

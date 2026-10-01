@@ -1,0 +1,137 @@
+.nav {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  width: 100%;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 24px 40px;
+}
+
+.links {
+  display: flex;
+  gap: 32px;
+  margin-left: auto;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.links a {
+  opacity: 0.68;
+  transition: opacity 0.2s;
+}
+
+.links a:hover,
+.links a:focus-visible {
+  opacity: 1;
+}
+
+.links a:focus-visible,
+.menu:focus-visible,
+.fechar:focus-visible,
+.painelLinks a:focus-visible {
+  outline: 2px solid var(--laranja);
+  outline-offset: 4px;
+}
+
+.menu {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 7px;
+  width: 40px;
+  height: 40px;
+  margin-left: auto;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.menu i {
+  display: block;
+  width: 24px;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+}
+
+.menu i + i {
+  width: 16px;
+}
+
+.painel {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 16px 20px 32px;
+  background: var(--areia);
+  color: var(--carvao);
+  animation: entra 0.25s ease-out both;
+}
+
+@keyframes entra {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.painelTopo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.fechar {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.fechar svg {
+  width: 18px;
+  height: 18px;
+}
+
+.painelLinks {
+  display: grid;
+  border-top: 1.5px solid var(--carvao);
+}
+
+.painelLinks a {
+  padding: 18px 0;
+  border-bottom: 1px solid var(--areia-linha);
+  font-weight: 700;
+  font-size: 30px;
+  letter-spacing: -0.03em;
+}
+
+@media (max-width: 760px) {
+  .nav {
+    padding: 16px 20px;
+  }
+
+  .nav .marca {
+    font-size: 24px;
+  }
+
+  .links,
+  .cta {
+    display: none;
+  }
+
+  .menu {
+    display: flex;
+  }
+}

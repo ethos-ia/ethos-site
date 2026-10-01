@@ -23,17 +23,18 @@ export type SendLeadResult =
 
 // Paleta Ethos (mesma de globals.css).
 const C = {
-  carvao: "#2C2620",
-  areia: "#F4EFE8",
-  areiaClara: "#FBF8F3",
-  ambar: "#C89A4F",
-  azul: "#5A7090",
-  nevoa: "#8BA5BB",
-  borda: "#E2DACE",
+  carvao: "#141413",
+  areia: "#F2E8D8",
+  areiaClara: "#FAF5EC",
+  laranja: "#FF6A2B",
+  laranjaTexto: "#AD3A0E",
+  pedra: "#6E655A",
+  pedraClara: "#A89F92",
+  borda: "#DDD0BA",
 } as const;
 
 const FONT_STACK =
-  "'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif";
+  "'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif";
 
 function escape(value: string): string {
   return value
@@ -42,21 +43,17 @@ function escape(value: string): string {
     .replace(/>/g, "&gt;");
 }
 
-// EthosMark inline: tres barras ambar (≡) + wordmark ETHOS em ExtraBold.
-// SVG inline evita bloqueio de imagens externas em clients de email.
+// Marca no e-mail: quadradinho laranja + "ethos" em texto. Clientes de e-mail
+// costumam bloquear SVG e imagens externas, então o símbolo não entra.
 function ethosMark(): string {
   return `
     <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse;">
       <tr>
-        <td style="padding-right: 10px; vertical-align: middle;">
-          <svg width="22" height="20" viewBox="0 0 22 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <rect x="0" y="2"  width="22" height="3" rx="1.5" fill="${C.ambar}"/>
-            <rect x="0" y="8"  width="22" height="3" rx="1.5" fill="${C.ambar}"/>
-            <rect x="0" y="14" width="22" height="3" rx="1.5" fill="${C.ambar}"/>
-          </svg>
+        <td style="padding-right: 8px; vertical-align: middle;">
+          <div style="width: 10px; height: 10px; border-radius: 3px; background-color: ${C.laranja};"></div>
         </td>
         <td style="vertical-align: middle;">
-          <span style="font-family: ${FONT_STACK}; font-size: 16px; font-weight: 800; letter-spacing: 0.18em; color: ${C.carvao};">ETHOS</span>
+          <span style="font-family: ${FONT_STACK}; font-size: 18px; font-weight: 700; letter-spacing: -0.02em; color: ${C.carvao};">ethos</span>
         </td>
       </tr>
     </table>
@@ -68,17 +65,17 @@ function field(label: string, value: string | undefined, opts: { link?: "mailto"
   if (!value || value.trim().length === 0) return "";
   let cell: string;
   if (opts.link === "mailto") {
-    cell = `<a href="mailto:${escape(value)}" style="color: ${C.carvao}; text-decoration: underline; text-underline-offset: 2px; text-decoration-color: ${C.ambar};">${escape(value)}</a>`;
+    cell = `<a href="mailto:${escape(value)}" style="color: ${C.carvao}; text-decoration: underline; text-underline-offset: 2px; text-decoration-color: ${C.laranja};">${escape(value)}</a>`;
   } else if (opts.link === "tel") {
     const digits = value.replace(/\D/g, "");
-    cell = `<a href="tel:+55${digits}" style="color: ${C.carvao}; text-decoration: underline; text-underline-offset: 2px; text-decoration-color: ${C.ambar};">${escape(value)}</a>`;
+    cell = `<a href="tel:+55${digits}" style="color: ${C.carvao}; text-decoration: underline; text-underline-offset: 2px; text-decoration-color: ${C.laranja};">${escape(value)}</a>`;
   } else {
     cell = escape(value);
   }
   return `
     <tr>
       <td style="padding: 10px 0; border-bottom: 1px solid ${C.borda}; width: 140px; vertical-align: top;">
-        <span style="font-family: ${FONT_STACK}; font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: ${C.azul};">${label}</span>
+        <span style="font-family: ${FONT_STACK}; font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: ${C.pedra};">${label}</span>
       </td>
       <td style="padding: 10px 0; border-bottom: 1px solid ${C.borda}; vertical-align: top;">
         <span style="font-family: ${FONT_STACK}; font-size: 15px; font-weight: 500; color: ${C.carvao};">${cell}</span>
@@ -145,7 +142,7 @@ export async function sendLeadEmail(payload: LeadPayload): Promise<SendLeadResul
                   <tr>
                     <td style="vertical-align: middle;">${ethosMark()}</td>
                     <td align="right" style="vertical-align: middle;">
-                      <span style="display: inline-block; padding: 5px 10px; border: 1px solid ${C.ambar}; border-radius: 999px; font-family: ${FONT_STACK}; font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: ${C.ambar};">${escape(origemTag)}</span>
+                      <span style="display: inline-block; padding: 5px 10px; border: 1px solid ${C.laranjaTexto}; border-radius: 999px; font-family: ${FONT_STACK}; font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: ${C.laranjaTexto};">${escape(origemTag)}</span>
                     </td>
                   </tr>
                 </table>
@@ -155,9 +152,9 @@ export async function sendLeadEmail(payload: LeadPayload): Promise<SendLeadResul
             <!-- Titulo editorial -->
             <tr>
               <td style="padding: 32px 32px 8px 32px;">
-                <p style="margin: 0 0 6px; font-family: ${FONT_STACK}; font-size: 11px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: ${C.azul};">Novo lead</p>
+                <p style="margin: 0 0 6px; font-family: ${FONT_STACK}; font-size: 11px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: ${C.pedra};">Novo lead</p>
                 <h1 style="margin: 0; font-family: ${FONT_STACK}; font-size: 26px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.2; color: ${C.carvao};">${escape(payload.empresa)}</h1>
-                <p style="margin: 6px 0 0; font-family: ${FONT_STACK}; font-size: 15px; font-weight: 500; color: ${C.azul};">via ${escape(payload.nome)}</p>
+                <p style="margin: 6px 0 0; font-family: ${FONT_STACK}; font-size: 15px; font-weight: 500; color: ${C.pedra};">via ${escape(payload.nome)}</p>
               </td>
             </tr>
 
@@ -178,8 +175,8 @@ export async function sendLeadEmail(payload: LeadPayload): Promise<SendLeadResul
             <!-- Mensagem -->
             <tr>
               <td style="padding: 24px 32px 32px 32px;">
-                <p style="margin: 0 0 10px; font-family: ${FONT_STACK}; font-size: 11px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: ${C.azul};">Mensagem</p>
-                <div style="padding: 18px 20px; background-color: ${C.areia}; border-left: 3px solid ${C.ambar}; border-radius: 6px;">
+                <p style="margin: 0 0 10px; font-family: ${FONT_STACK}; font-size: 11px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: ${C.pedra};">Mensagem</p>
+                <div style="padding: 18px 20px; background-color: ${C.areia}; border-left: 3px solid ${C.laranja}; border-radius: 6px;">
                   <p style="margin: 0; font-family: ${FONT_STACK}; font-size: 15px; line-height: 1.7; color: ${C.carvao}; white-space: pre-wrap;">${escape(payload.mensagem)}</p>
                 </div>
               </td>
@@ -206,10 +203,10 @@ export async function sendLeadEmail(payload: LeadPayload): Promise<SendLeadResul
                 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
                   <tr>
                     <td style="vertical-align: middle;">
-                      <span style="font-family: ${FONT_STACK}; font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: ${C.nevoa};">BPO de tecnologia</span>
+                      <span style="font-family: ${FONT_STACK}; font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: ${C.pedraClara};">Inteligência sob medida</span>
                     </td>
                     <td align="right" style="vertical-align: middle;">
-                      <a href="https://www.somosethos.com.br" style="font-family: ${FONT_STACK}; font-size: 12px; font-weight: 500; color: ${C.azul}; text-decoration: none;">somosethos.com.br</a>
+                      <a href="https://www.somosethos.com.br" style="font-family: ${FONT_STACK}; font-size: 12px; font-weight: 500; color: ${C.pedra}; text-decoration: none;">somosethos.com.br</a>
                     </td>
                   </tr>
                 </table>
@@ -222,7 +219,7 @@ export async function sendLeadEmail(payload: LeadPayload): Promise<SendLeadResul
           <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="max-width: 600px; width: 100%;">
             <tr>
               <td align="center" style="padding: 16px 24px 0 24px;">
-                <p style="margin: 0; font-family: ${FONT_STACK}; font-size: 11px; color: ${C.nevoa};">Notificacao automatica enviada via ${escape(origemLabel)}.</p>
+                <p style="margin: 0; font-family: ${FONT_STACK}; font-size: 11px; color: ${C.pedraClara};">Notificacao automatica enviada via ${escape(origemLabel)}.</p>
               </td>
             </tr>
           </table>

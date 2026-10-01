@@ -1,0 +1,111 @@
+.secao {
+  position: relative;
+  padding: clamp(88px, 10vw, 144px) 0;
+  background: var(--carvao);
+  color: var(--areia);
+}
+
+.esteira {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+
+.trilho {
+  display: flex;
+  width: max-content;
+  animation: desliza 66s linear infinite;
+}
+
+.esteira:hover .trilho {
+  animation-play-state: paused;
+}
+
+@keyframes desliza {
+  to { transform: translateX(calc(-100% / 3)); }
+}
+
+.copia {
+  display: contents;
+}
+
+.case {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 420px;
+  padding: 4px 48px 8px;
+  border-left: 1px solid var(--linha);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  height: 128px;
+  margin-bottom: 12px;
+}
+
+/* Logo monocromático em areia: o PNG entra só como máscara */
+.marca {
+  display: block;
+  width: var(--w);
+  height: var(--h);
+  background: var(--areia);
+  -webkit-mask: var(--logo) left center / contain no-repeat;
+  mask: var(--logo) left center / contain no-repeat;
+}
+
+.tag {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--laranja);
+}
+
+.convite {
+  justify-content: space-between;
+  padding: 34px 40px;
+  border-left: 0;
+  background: var(--laranja);
+  color: var(--carvao);
+}
+
+.convite p {
+  max-width: 10ch;
+  font-weight: 900;
+  font-size: 36px;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trilho {
+    animation: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .case {
+    width: 300px;
+    padding: 4px 30px 8px;
+  }
+
+  .logo {
+    height: 96px;
+  }
+
+  .marca {
+    width: calc(var(--w) * 0.72);
+    height: calc(var(--h) * 0.72);
+  }
+
+  .convite {
+    padding: 28px 30px;
+  }
+
+  .convite p {
+    font-size: 30px;
+  }
+}

@@ -1,26 +1,32 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Google_Sans_Flex } from "next/font/google";
+import localFont from "next/font/local";
+import { JetBrains_Mono } from "next/font/google";
 import { ContactProvider } from "@/contexts/ContactContext";
 import { ContactModal } from "@/components/ui/ContactModal";
 import { ChatWidget } from "@/components/ui/ChatWidget";
 import "./globals.css";
 
-const plusJakarta = Plus_Jakarta_Sans({
-  variable: "--font-jakarta",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+// Satoshi (Fontshare) servida localmente: só os pesos que a marca usa
+const satoshi = localFont({
+  src: [
+    { path: "../fonts/satoshi-500.woff2", weight: "500", style: "normal" },
+    { path: "../fonts/satoshi-700.woff2", weight: "700", style: "normal" },
+    { path: "../fonts/satoshi-900.woff2", weight: "900", style: "normal" },
+  ],
+  variable: "--font-satoshi",
   display: "swap",
 });
 
-const googleSans = Google_Sans_Flex({
-  variable: "--font-google-sans",
+const jetbrains = JetBrains_Mono({
+  variable: "--font-jetbrains",
   subsets: ["latin"],
+  weight: ["400", "500"],
   display: "swap",
 });
 
-const SITE_TITLE = "Ethos · BPO de tecnologia especializado em IA";
+const SITE_TITLE = "ethos · Software house especializada em soluções com IA";
 const SITE_DESCRIPTION =
-  "BPO de tecnologia especializado em soluções com IA. Entramos na sua operação, achamos onde a IA gera retorno real e operamos sob nossa responsabilidade — com monitoramento 24/7 e resposta humana priorizada.";
+  "Software house especializada em soluções com IA. Automação com IA, sistemas sob medida e IA generativa, do tamanho exato do problema da sua empresa.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.somosethos.com.br"),
@@ -40,7 +46,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className={`${plusJakarta.variable} ${googleSans.variable} h-full antialiased`}>
+    <html lang="pt-BR" className={`${satoshi.variable} ${jetbrains.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
         <ContactProvider>
           {children}
