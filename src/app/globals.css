@@ -1,12 +1,38 @@
 @import "tailwindcss";
 
+/* Identidade ethos (brand book de 01/10/2026): areia, carvão e laranja vivo.
+   As variáveis ficam no :root (os CSS Modules das seções usam direto) e o tema
+   do Tailwind aponta para elas (bg-areia, text-laranja...). */
+:root {
+  --carvao: #141413;
+  --carvao-2: #1C1B19;
+  --linha: #2E2B27;
+  --areia: #F2E8D8;
+  --areia-linha: #DDD0BA;
+  --laranja: #FF6A2B;
+  --laranja-texto: #AD3A0E;
+  --pedra: #6E655A;
+  --pedra-clara: #A89F92;
+  --tinta: #45403A;
+  /* fontes do next/font (variáveis no <html>): Satoshi para tudo, JetBrains Mono para rótulos */
+  --sans: var(--font-satoshi), Arial, sans-serif;
+  --mono: var(--font-jetbrains), Consolas, monospace;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 @theme inline {
-  --color-carvao:  #2C2620;
-  --color-azul:    #5A7090;
-  --color-nevoa:   #8BA5BB;
-  --color-ambar:   #C89A4F;
-  --color-areia:   #F4EFE8;
-  --font-jakarta:  var(--font-jakarta);
+  --color-carvao: var(--carvao);
+  --color-carvao-2: var(--carvao-2);
+  --color-linha: var(--linha);
+  --color-areia: var(--areia);
+  --color-areia-linha: var(--areia-linha);
+  --color-laranja: var(--laranja);
+  --color-laranja-texto: var(--laranja-texto);
+  --color-pedra: var(--pedra);
+  --color-pedra-clara: var(--pedra-clara);
+  --color-tinta: var(--tinta);
+  --font-sans: var(--sans);
+  --font-mono: var(--mono);
 
   --animate-fade-up: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
   --animate-fade-in: fade-in 0.5s ease-out both;
@@ -40,10 +66,30 @@
   to { opacity: 1; }
 }
 
+html {
+  background-color: var(--carvao);
+}
+
 body {
-  background-color: #2C2620;
-  color: #2C2620;
-  font-family: var(--font-jakarta), sans-serif;
+  background-color: var(--areia);
+  color: var(--carvao);
+  font-family: var(--sans);
+  font-weight: 500;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Largura máxima do conteúdo das seções */
+.largura {
+  width: 100%;
+  max-width: 1360px;
+  margin-inline: auto;
+  padding-inline: 40px;
+}
+
+@media (max-width: 760px) {
+  .largura {
+    padding-inline: 20px;
+  }
 }
 
 .reveal {

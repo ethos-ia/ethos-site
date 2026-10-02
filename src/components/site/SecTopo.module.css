@@ -1,0 +1,57 @@
+.topo {
+  display: grid;
+  gap: 22px;
+  margin-bottom: clamp(48px, 6vw, 80px);
+}
+
+.rotulo {
+  display: flex;
+  gap: 14px;
+  align-items: baseline;
+  padding-top: 18px;
+  border-top: 1px solid var(--areia-linha);
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pedra);
+}
+
+.rotulo span {
+  color: var(--laranja-texto);
+}
+
+.escuro .rotulo {
+  border-color: var(--linha);
+  color: var(--pedra-clara);
+}
+
+.escuro .rotulo span {
+  color: var(--laranja);
+}
+
+.titulo {
+  max-width: 19ch;
+  font-weight: 900;
+  font-size: clamp(38px, 4.6vw, 68px);
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+}
+
+.lead {
+  max-width: 46ch;
+  font-weight: 500;
+  font-size: clamp(17px, 1.5vw, 21px);
+  line-height: 1.5;
+  color: var(--tinta);
+}
+
+.escuro .lead {
+  color: var(--pedra-clara);
+}
+
+@media (max-width: 760px) {
+  .topo {
+    gap: 16px;
+  }
+}

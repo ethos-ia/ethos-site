@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // rascunhos e mockups (fora do git)
+    ".tmp/**",
   ]),
 ]);
 

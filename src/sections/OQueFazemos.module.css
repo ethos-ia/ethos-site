@@ -1,0 +1,400 @@
+.secao {
+  position: relative;
+  padding: clamp(88px, 10vw, 144px) 0;
+  background: var(--areia);
+  color: var(--carvao);
+}
+
+.frentes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.frente {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.frente h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.42em;
+  font-weight: 700;
+  font-size: clamp(24px, 2.2vw, 30px);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.frente h3 i {
+  flex: none;
+  width: 0.3em;
+  height: 0.3em;
+  border-radius: 0.08em;
+  background: var(--laranja);
+}
+
+.frente p {
+  max-width: 36ch;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--tinta);
+}
+
+/* Logos dos cases em destaque, em carvão */
+.cases {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  height: 84px;
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid var(--areia-linha);
+}
+
+.cases:focus-visible {
+  outline: 2px solid var(--laranja);
+  outline-offset: 4px;
+}
+
+.r {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pedra);
+}
+
+.logo {
+  display: block;
+  background: var(--carvao);
+  -webkit-mask: var(--logo) center / contain no-repeat;
+  mask: var(--logo) center / contain no-repeat;
+  transition: background-color 0.2s;
+}
+
+.cases:hover .logo {
+  background: var(--laranja-texto);
+}
+
+/* ---------- Cenas: painel carvão, mesma linguagem do topo ---------- */
+.cena {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 20px;
+  background: radial-gradient(ellipse 80% 70% at 50% 40%, #221f1c, var(--carvao) 70%);
+  color: var(--areia);
+}
+
+.rot {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pedra-clara);
+}
+
+/* 1 · Automação: o e-mail chega, desce pelo fio e vira uma linha da tabela */
+.email {
+  position: absolute;
+  left: 7%;
+  top: 10%;
+  width: 46%;
+  display: grid;
+  gap: 6px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: #2a2825;
+  animation: email 7s var(--ease) infinite;
+}
+
+.email b {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.email i,
+.lin i {
+  display: block;
+  height: 5px;
+  border-radius: 3px;
+  background: #3e3a35;
+}
+
+.email .curta {
+  width: 60%;
+}
+
+.fio {
+  position: absolute;
+  left: 30%;
+  top: 46%;
+  width: 2px;
+  height: 12%;
+  background: var(--linha);
+}
+
+.fio span {
+  position: absolute;
+  left: -3px;
+  top: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--laranja);
+  animation: pulso 7s linear infinite;
+}
+
+.tabela {
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  bottom: 8%;
+  display: grid;
+  gap: 6px;
+}
+
+.cab,
+.lin {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 0.8fr;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 10px;
+  border-radius: 8px;
+}
+
+.cab {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--pedra-clara);
+}
+
+.lin {
+  background: #1f1d1b;
+}
+
+.lin em {
+  font-family: var(--mono);
+  font-style: normal;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--pedra-clara);
+}
+
+.nova {
+  animation: linha 7s var(--ease) infinite;
+}
+
+.nova em {
+  color: var(--laranja);
+}
+
+@keyframes email {
+  0% { opacity: 0; transform: translateX(-30px); }
+  10%, 32% { opacity: 1; transform: none; }
+  44%, 100% { opacity: 0; transform: translateY(40px) scale(0.85); }
+}
+
+@keyframes pulso {
+  0%, 30% { top: 0; opacity: 0; }
+  32% { opacity: 1; }
+  46% { top: 100%; opacity: 1; }
+  50%, 100% { top: 100%; opacity: 0; }
+}
+
+@keyframes linha {
+  0%, 46% { opacity: 0; transform: translateY(8px); }
+  54%, 92% { opacity: 1; transform: none; box-shadow: inset 3px 0 0 var(--laranja); }
+  100% { opacity: 0; }
+}
+
+/* 2 · Sistemas e aplicativos: painel com números subindo e um celular com a agenda */
+.painel {
+  position: absolute;
+  left: 7%;
+  top: 12%;
+  bottom: 12%;
+  width: 54%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px;
+  border-radius: 12px;
+  background: #1f1d1b;
+}
+
+.barras {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  gap: 8%;
+  padding-top: 6px;
+}
+
+.barras i {
+  flex: 1;
+  height: calc(var(--a) * 100%);
+  border-radius: 4px 4px 2px 2px;
+  background: #3e3a35;
+  transform-origin: bottom;
+  animation: barra 6s var(--ease) infinite;
+}
+
+.barras i:nth-child(4) {
+  background: var(--laranja);
+}
+
+.grafico {
+  width: 100%;
+  height: 26%;
+  fill: none;
+  stroke: var(--areia);
+  stroke-width: 2;
+  stroke-dasharray: 260;
+  animation: traco 6s var(--ease) infinite;
+}
+
+.celular {
+  position: absolute;
+  right: 7%;
+  top: 9%;
+  bottom: 9%;
+  width: 28%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px 10px 10px;
+  border: 2px solid #3e3a35;
+  border-radius: 18px;
+  background: #1a1917;
+}
+
+.celular .rot {
+  font-size: 8px;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 6px;
+  padding: 7px;
+  border-radius: 7px;
+  background: #2a2825;
+  animation: item 6s var(--ease) infinite;
+}
+
+.item b {
+  width: 9px;
+  height: 9px;
+  border-radius: 3px;
+  background: var(--laranja);
+}
+
+.item i {
+  height: 5px;
+  border-radius: 3px;
+  background: #4a453f;
+}
+
+@keyframes barra {
+  0% { transform: scaleY(0.15); }
+  25%, 85% { transform: scaleY(1); }
+  100% { transform: scaleY(0.15); }
+}
+
+@keyframes traco {
+  0% { stroke-dashoffset: 260; }
+  35%, 85% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: 260; }
+}
+
+@keyframes item {
+  0% { opacity: 0; transform: translateY(10px); }
+  20%, 85% { opacity: 1; transform: none; }
+  100% { opacity: 0; }
+}
+
+/* 3 · IA generativa: entre peças iguais, a do meio ganha uma forma nova */
+.grade {
+  position: absolute;
+  inset: 14% 22%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-content: center;
+  gap: 9%;
+}
+
+.grade i {
+  aspect-ratio: 1;
+  border: 1px solid #33302c;
+  border-radius: 22%;
+  background: #2a2825;
+}
+
+.grade .viva {
+  position: relative;
+  z-index: 1;
+  border: 0;
+  animation: viva 6s var(--ease) infinite;
+}
+
+.varre {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--laranja), transparent);
+  box-shadow: 0 0 18px var(--laranja);
+  animation: varre 6s linear infinite;
+}
+
+.gera {
+  position: absolute;
+  left: 7%;
+  bottom: 8%;
+  animation: pisca 6s steps(1) infinite;
+}
+
+@keyframes viva {
+  0%, 20% { border-radius: 22%; background: #2a2825; transform: none; }
+  45%, 85% {
+    border-radius: 58% 42% 63% 37% / 44% 56% 44% 56%;
+    background: var(--laranja);
+    transform: scale(1.5) rotate(-8deg);
+    box-shadow: 0 0 40px rgba(255, 106, 43, 0.45);
+  }
+  100% { border-radius: 22%; background: #2a2825; transform: none; }
+}
+
+@keyframes varre {
+  0% { top: -5%; opacity: 0; }
+  8% { opacity: 1; }
+  40% { top: 105%; opacity: 1; }
+  42%, 100% { top: 105%; opacity: 0; }
+}
+
+@keyframes pisca {
+  0%, 42% { opacity: 1; }
+  43%, 100% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cena * {
+    animation: none !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .frentes {
+    grid-template-columns: 1fr;
+    gap: 56px;
+  }
+}

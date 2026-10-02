@@ -1,0 +1,104 @@
+.secao {
+  position: relative;
+  padding: clamp(88px, 10vw, 144px) 0;
+  background: var(--carvao);
+  color: var(--areia);
+}
+
+.esteira {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+
+.trilho {
+  display: flex;
+  width: max-content;
+  animation: desliza 20s linear infinite;
+}
+
+.esteira:hover .trilho {
+  animation-play-state: paused;
+}
+
+@keyframes desliza {
+  to { transform: translateX(calc(-100% / 3)); }
+}
+
+.copia {
+  display: contents;
+}
+
+.case {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  width: 320px;
+  padding: 8px 32px 12px;
+  border-left: 1px solid var(--linha);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 190px;
+}
+
+/* Logo monocromático em areia: o PNG entra só como máscara */
+.marca {
+  display: block;
+  width: var(--w);
+  height: var(--h);
+  background: var(--areia);
+  -webkit-mask: var(--logo) center / contain no-repeat;
+  mask: var(--logo) center / contain no-repeat;
+}
+
+.tag {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--laranja);
+}
+
+/* Convite discreto abaixo da esteira (a chamada forte fica no fim da página) */
+.chamada {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 20px;
+  margin-top: 56px;
+  font-size: 17px;
+  color: var(--pedra-clara);
+}
+
+.chamada button {
+  color: var(--laranja);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trilho {
+    animation: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .case {
+    width: 250px;
+    padding: 6px 24px 10px;
+  }
+
+  .logo {
+    height: 140px;
+  }
+
+  .marca {
+    width: calc(var(--w) * 0.72);
+    height: calc(var(--h) * 0.72);
+  }
+
+}

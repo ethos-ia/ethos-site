@@ -10,19 +10,18 @@ export default function PrivacidadePage() {
   return (
     <>
       <Nav />
-      <main className="w-full bg-[#F4EFE8] pt-32 pb-20 px-6 min-h-screen">
+      <main className="w-full bg-areia pt-12 md:pt-16 pb-20 px-6 min-h-screen">
         <article className="mx-auto max-w-3xl prose prose-stone">
 
-          <p className="text-[0.62rem] font-semibold text-[#5A7090] tracking-[0.25em] uppercase mb-4">
+          <p className="font-mono text-[0.72rem] text-pedra tracking-[0.12em] uppercase mb-4">
             Política de Privacidade
           </p>
           <h1
-            className="text-[2.25rem] md:text-[2.75rem] font-extrabold text-[#2C2620] leading-[1.1] tracking-tight mb-6"
-            style={{ fontFamily: "var(--font-jakarta)" }}
+            className="text-[2.25rem] md:text-[3rem] font-black text-carvao leading-[1.02] tracking-[-0.04em] mb-6"
           >
             Como a Ethos trata os seus dados.
           </h1>
-          <p className="text-base text-[#5A7090] leading-[1.8] mb-10">
+          <p className="text-base text-tinta leading-[1.8] mb-10">
             Esta página descreve, em linguagem simples, como a Ethos coleta, utiliza e protege os
             dados pessoais que recebe pelo formulário de contato deste site. O texto está em
             conformidade com a Lei Geral de Proteção de Dados (LGPD, Lei nº 13.709/2018).
@@ -33,7 +32,7 @@ export default function PrivacidadePage() {
             <p>
               A Ethos AI - Automações e Integrações é o controlador dos dados coletados.
               Em caso de dúvidas, escreva para{" "}
-              <a href="mailto:contato@somosethos.com.br" className="text-[#C89A4F] underline">
+              <a href="mailto:contato@somosethos.com.br" className="text-laranja-texto underline underline-offset-2">
                 contato@somosethos.com.br
               </a>.
             </p>
@@ -78,7 +77,7 @@ export default function PrivacidadePage() {
               A LGPD garante a você os direitos de acessar, corrigir, atualizar, anonimizar ou
               eliminar os seus dados, além de revogar o consentimento a qualquer momento. Para
               exercer qualquer um desses direitos, escreva para{" "}
-              <a href="mailto:contato@somosethos.com.br" className="text-[#C89A4F] underline">
+              <a href="mailto:contato@somosethos.com.br" className="text-laranja-texto underline underline-offset-2">
                 contato@somosethos.com.br
               </a>{" "}
               identificando-se e indicando o pedido. Respondemos em até 15 dias.
@@ -102,7 +101,7 @@ export default function PrivacidadePage() {
             </p>
           </Section>
 
-          <p className="mt-12 text-xs text-[#5A7090]/70 italic">
+          <p className="mt-12 text-xs text-pedra italic">
             Este texto é um ponto de partida com base nos princípios da LGPD. Antes de assumir
             obrigações comerciais relevantes, recomendamos revisão por assessoria jurídica.
           </p>
@@ -118,12 +117,11 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   return (
     <section className="mb-10">
       <h2
-        className="text-xl md:text-2xl font-extrabold text-[#2C2620] tracking-tight mb-3"
-        style={{ fontFamily: "var(--font-jakarta)" }}
+        className="text-xl md:text-2xl font-bold text-carvao tracking-[-0.02em] mb-3"
       >
         {title}
       </h2>
-      <div className="text-[#5A7090] leading-[1.8] text-base [&_p]:mb-3">
+      <div className="text-tinta leading-[1.8] text-base [&_p]:mb-3">
         {children}
       </div>
     </section>

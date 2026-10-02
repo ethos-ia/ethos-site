@@ -1,0 +1,249 @@
+/* A trilha dá a distância de rolagem; o palco fica preso na tela enquanto o filme cresce */
+.trilha {
+  position: relative;
+  height: 300vh;
+}
+
+.palco {
+  --mix: 0%;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  background: var(--areia);
+  color: var(--carvao);
+}
+
+.escurece {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse 75% 65% at 50% 45%, #221f1c 0%, var(--carvao) 58%, #0d0d0c 100%);
+}
+
+.topo {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.miolo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: clamp(12px, 4vh, 48px) 40px clamp(28px, 7vh, 72px);
+}
+
+.ficha {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--mono);
+  font-size: 13.5px;
+  color: var(--pedra);
+  text-wrap: balance;
+}
+
+.ficha i {
+  flex: none;
+  width: 9px;
+  height: 9px;
+  border-radius: 3px;
+  background: var(--laranja);
+}
+
+.titulo {
+  margin-left: -0.055em;
+  font-weight: 900;
+  font-size: min(12.6vw, 20.5vh, 184px);
+  line-height: 0.88;
+  letter-spacing: -0.052em;
+}
+
+.l1,
+.l2 {
+  display: block;
+  white-space: nowrap;
+}
+
+/* Vaga do filme dentro do título: o quadro de verdade é posicionado por cima dela */
+.vaga {
+  display: inline-block;
+  width: calc(0.7em * 16 / 9);
+  height: 0.7em;
+  margin-left: 0.17em;
+}
+
+.pe {
+  display: grid;
+  justify-items: start;
+  gap: 26px;
+}
+
+.lead {
+  max-width: 35ch;
+  font-weight: 500;
+  font-size: clamp(17px, 1.5vw, 21px);
+  line-height: 1.5;
+  color: var(--tinta);
+  text-wrap: pretty;
+}
+
+.quadro {
+  position: absolute;
+  z-index: 3;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  background: var(--carvao);
+  cursor: pointer;
+}
+
+.quadro:focus-visible,
+.som:focus-visible {
+  outline: 2px solid var(--laranja);
+  outline-offset: 4px;
+}
+
+/* O vídeo fica sempre do tamanho da tela (o JS fixa largura e altura) e só é escalado com transform:
+   redimensionar o elemento de vídeo a cada quadro derrubava a expansão para ~15 quadros por segundo */
+.quadro video {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: block;
+  max-width: none;
+  object-fit: cover;
+}
+
+.cant,
+.leitura {
+  position: absolute;
+  z-index: 4;
+  pointer-events: none;
+  color: color-mix(in srgb, var(--areia) var(--mix), var(--carvao));
+}
+
+/* Em repouso as cantoneiras "respiram", como quem está tirando a medida */
+.respira {
+  animation: respira 2.8s ease-in-out infinite;
+}
+
+@keyframes respira {
+  50% { transform: scale(1.03); }
+}
+
+.cant i {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border: 0 solid currentColor;
+}
+
+.cant i:nth-child(1) { left: 0; top: 0; border-width: 1.5px 0 0 1.5px; }
+.cant i:nth-child(2) { right: 0; top: 0; border-width: 1.5px 1.5px 0 0; }
+.cant i:nth-child(3) { left: 0; bottom: 0; border-width: 0 0 1.5px 1.5px; }
+.cant i:nth-child(4) { right: 0; bottom: 0; border-width: 0 1.5px 1.5px 0; }
+
+.leitura {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  line-height: 16px;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+.leitura b {
+  font-weight: 500;
+}
+
+.leitura span {
+  opacity: 0.72;
+}
+
+/* Centralizado embaixo: o canto direito é da bolha do chat */
+.som {
+  position: absolute;
+  z-index: 5;
+  left: 50%;
+  bottom: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 18px 11px 15px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--areia);
+  color: var(--carvao);
+  font: 700 15px var(--sans);
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%);
+  transition: opacity 0.4s var(--ease);
+}
+
+.somVisivel {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.som svg {
+  width: 18px;
+  height: 18px;
+  color: var(--laranja-texto);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .respira {
+    animation: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .miolo {
+    justify-content: flex-start;
+    padding: 8px 20px 32px;
+  }
+
+  .ficha {
+    margin-bottom: auto;
+    font-size: 12px;
+  }
+
+  .titulo {
+    margin-top: 28px;
+    font-size: 15.2vw;
+  }
+
+  /* No celular o filme ocupa a largura toda, com a medida em cima */
+  .vaga {
+    display: block;
+    width: calc(100% - 0.055 * 15.2vw);
+    height: auto;
+    aspect-ratio: 4 / 3;
+    margin: 52px 0 0 calc(0.055 * 15.2vw);
+  }
+
+  .pe {
+    margin-top: 36px;
+  }
+
+  .lead {
+    font-size: 17px;
+  }
+
+  .leitura {
+    font-size: 11.5px;
+  }
+}

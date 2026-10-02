@@ -1,106 +1,78 @@
 "use client";
 
-import { useState } from "react";
-import { useContact } from "@/contexts/ContactContext";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
+import Link from "next/link";
+import { Marca } from "@/components/site/Marca";
+import { BotaoComece } from "@/components/site/BotaoComece";
+import s from "./Nav.module.css";
 
 const links = [
-  { label: "O que operamos", href: "#servicos" },
-  { label: "Como funciona", href: "#processo" },
-  { label: "FAQ", href: "#faq" },
+  { label: "Cases", href: "/#cases" },
+  { label: "O que fazemos", href: "/#o-que-fazemos" },
+  { label: "Como trabalhamos", href: "/#como-trabalhamos" },
+  { label: "Perguntas", href: "/#perguntas" },
 ];
 
-function EthosLogo() {
-  return (
-    <a href="#" className="flex items-center gap-2 group">
-      <div className="flex flex-col gap-[5px]">
-        <div className="h-[3px] w-6 rounded-full bg-[#C89A4F]" />
-        <div className="h-[3px] w-4 rounded-full bg-[#C89A4F]" />
-        <div className="h-[3px] w-5 rounded-full bg-[#C89A4F]" />
-      </div>
-      <span
-        className="text-white font-extrabold tracking-[0.05em] text-lg"
-        style={{ fontFamily: "var(--font-jakarta)" }}
-      >
-        ETHOS.
-      </span>
-    </a>
-  );
-}
-
 export function Nav() {
-  const [open, setOpen] = useState(false);
-  const { open: openContact } = useContact();
+  const [aberto, setAberto] = useState(false);
+
+  // Menu do celular: Esc fecha e a página não rola por baixo
+  useEffect(() => {
+    if (!aberto) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setAberto(false);
+    };
+    document.addEventListener("keydown", onKey);
+    const antes = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = antes;
+    };
+  }, [aberto]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-[#2C2620]">
-      <div className="mx-auto max-w-5xl px-6 h-16 flex items-center justify-between">
-        <EthosLogo />
-
-        {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-8">
-          {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className="text-sm text-[#8BA5BB] hover:text-white transition-colors duration-200 font-medium font-[family-name:var(--font-google-sans)]"
-            >
-              {l.label}
-            </a>
-          ))}
-        </nav>
-
-        <div className="hidden md:block">
-          <button
-            onClick={openContact}
-            className="inline-flex items-center gap-2 bg-[#C89A4F] text-[#2C2620] text-sm font-bold tracking-wide rounded-full px-5 py-2.5 hover:bg-[#b88c47] transition-colors duration-200 active:scale-[0.98]"
-          >
-            Conversar
-            <span aria-hidden="true">→</span>
-          </button>
-        </div>
-
-        {/* Mobile hamburger */}
-        <button
-          className="md:hidden p-2 text-white"
-          onClick={() => setOpen(!open)}
-          aria-label={open ? "Fechar menu" : "Abrir menu"}
-        >
-          <div
-            className="w-5 h-px bg-current mb-1.5 transition-transform duration-200"
-            style={{ transform: open ? "rotate(45deg) translateY(4px)" : "none" }}
-          />
-          <div
-            className="w-5 h-px bg-current mb-1.5 transition-opacity duration-200"
-            style={{ opacity: open ? 0 : 1 }}
-          />
-          <div
-            className="w-5 h-px bg-current transition-transform duration-200"
-            style={{ transform: open ? "rotate(-45deg) translateY(-4px)" : "none" }}
-          />
-        </button>
+    <header className={s.nav}>
+      <Marca className={s.marca} />
+      <nav className={s.links} aria-label="Principal">
+        {links.map((l) => (
+          <Link key={l.href} href={l.href}>
+            {l.label}
+          </Link>
+        ))}
+      </nav>
+      <div className={s.cta}>
+        <BotaoComece variante="pilulaNav" />
       </div>
+      <button type="button" className={s.menu} aria-label="Abrir menu" aria-expanded={aberto} onClick={() => setAberto(true)}>
+        <i />
+        <i />
+      </button>
 
-      {/* Mobile menu */}
-      {open && (
-        <div className="md:hidden bg-[#2C2620] border-t border-white/8 px-6 py-6 flex flex-col gap-5">
-          {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              onClick={() => setOpen(false)}
-              className="text-base text-[#8BA5BB] hover:text-white transition-colors font-[family-name:var(--font-google-sans)]"
-            >
-              {l.label}
-            </a>
-          ))}
-          <button
-            onClick={() => { setOpen(false); openContact(); }}
-            className="w-full bg-[#C89A4F] text-[#2C2620] text-sm font-bold tracking-wide rounded-full px-5 py-3 hover:bg-[#b88c47] transition-colors"
-          >
-            Conversar →
-          </button>
-        </div>
-      )}
+      {/* Portal no body: dentro do palco do topo o filme ficaria por cima do menu */}
+      {aberto &&
+        createPortal(
+          <div className={s.painel} role="dialog" aria-modal="true" aria-label="Menu">
+            <div className={s.painelTopo}>
+              <Marca />
+              <button type="button" className={s.fechar} aria-label="Fechar menu" onClick={() => setAberto(false)}>
+                <svg viewBox="0 0 14 14" aria-hidden="true">
+                  <path d="M1 1l12 12M13 1L1 13" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                </svg>
+              </button>
+            </div>
+            <nav className={s.painelLinks} aria-label="Principal">
+              {links.map((l) => (
+                <Link key={l.href} href={l.href} onClick={() => setAberto(false)}>
+                  {l.label}
+                </Link>
+              ))}
+            </nav>
+            <BotaoComece aoClicar={() => setAberto(false)} />
+          </div>,
+          document.body
+        )}
     </header>
   );
 }

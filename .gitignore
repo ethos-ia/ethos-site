@@ -25,6 +25,10 @@
 *.pem
 *.png
 *.jpg
+# as imagens do site (public/) entram; capturas soltas continuam fora
+!public/**/*.png
+!public/**/*.jpg
+!src/app/*.png
 
 # playwright-cli
 .playwright-cli/
@@ -48,3 +52,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# rascunhos e mockups (regeneráveis, nunca commitados)
+.tmp/

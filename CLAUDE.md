@@ -10,18 +10,20 @@
 - **Projeto:** Site institucional da Ethos
 - **Repo:** `ethos-ia/ethos-site`
 - **Colaboradores:** Matheus Bosco (`matheusbosco`), Luca Braggio (`Lbraggioo`)
-- **Posicionamento:** BPO de tecnologia. A Ethos opera continuamente a camada de tecnologia que sustenta a operacao do cliente — nao entrega projetos pontuais. Copy e design devem reforcar operacao continua, nao entrega.
-- **Modelo operacional:** monitoramento continuo 24/7 + resposta humana priorizada. Nunca prometer time alocado em dedicacao exclusiva.
-- **Estetica alvo:** minimalista, premium, moderno
-- **Referencias visuais:** Manus, Anthropic — layout limpo, espacamento generoso, tipografia forte
-- **Referencia de conceito:** LeftClick.ai — posicionamento e funcionalidades de agencia de IA (referencia parcial; nossa posicao final e BPO de tecnologia, nao agencia)
+- **Posicionamento:** software house especializada em solucoes com IA. Tres frentes: automacao com IA, sistemas sob medida e IA generativa. Assinatura "Inteligencia sob medida."; manifesto "Cada problema pede a sua solucao."
+- **Depois de pronto:** a ethos pode seguir cuidando e evoluindo a solucao ou entregar tudo documentado, conforme o contrato. Nunca prometer time alocado em dedicacao exclusiva.
+- **Estetica alvo:** editorial e tecnica, na linha da Anthropic: areia/carvao/laranja, Satoshi + JetBrains Mono, linguagem de medida (cantoneiras, regua, rotulos mono). Identidade em `brand_assets/`.
+
+## Conta Vercel
+
+- Time **Ethos AI's projects** (plano Pro). Transferido da conta pessoal do Matheus em 01/10/2026; confirmado no ar (dominio e deploy) apos a transferencia.
 
 ---
 
 ## 2. Stack e Estrutura
 
-- **Framework:** Next.js 15 (App Router) + TypeScript
-- **Estilizacao:** Tailwind CSS v4 — tokens de cor e tipografia definidos em `src/app/globals.css` via `@theme`
+- **Framework:** Next.js 16 (App Router) + TypeScript
+- **Estilizacao:** CSS Modules por secao + Tailwind CSS v4. Cores e fontes no `:root` de `src/app/globals.css`; o `@theme` do Tailwind aponta para elas
 - **Hospedagem:** Vercel (deploy automatico a cada push na `main`)
 - **Idioma:** Portugues (PT-BR)
 
@@ -34,8 +36,9 @@ src/
     layout.tsx        — layout raiz, metadata global, fonte
     page.tsx          — composicao das secoes da landing page
   components/
-    ui/               — componentes atomicos (Button, Reveal, AnimatedTextCycle, SplineScene, etc.)
-    layout/           — Nav, Footer, Section wrapper
+    site/             — pecas da identidade (Marca, Simbolo, BotaoComece, SecTopo, icones)
+    ui/               — formulario de contato, chat do Otto, Button
+    layout/           — Nav, Footer
   sections/           — secoes da landing page
 brand_assets/         — logo, paleta, tipografia (ver README la dentro)
 ```
@@ -43,11 +46,11 @@ brand_assets/         — logo, paleta, tipografia (ver README la dentro)
 ### Ordem das secoes na landing (page.tsx)
 
 ```
-Hero → Dores → ParaQuem → Services → Process → NaPratica → Seguranca → FAQ → CtaFinal
+Topo (filme na rolagem) → Cases → OQueFazemos → ComoTrabalhamos → Perguntas → ChamadaFinal
 ```
 
-- **ProvaSocial.tsx** existe em `src/sections/` mas nao esta importada na page.tsx — ativar quando houver cases reais. Estrutura espera array `clients` com `{name, logoUrl?}`.
-- **Numbers.tsx** foi removido propositalmente — sem cases reais, claims numericos ficam off.
+- **Topo:** o filme de lancamento (`public/filme/`) sai da vaga no titulo e cresce ate a tela cheia com a rolagem. Comeca mudo (navegador nao deixa tocar com som sozinho); o som liga pelo botao "Assistir com som" ou clicando no video.
+- **Cases:** so o logo (monocromatico, areia) e a classificacao do que foi feito, sem texto nem numeros. O logo do Parque e uma reconstrucao do PNG de 200x70 px: trocar pelo vetor quando chegar.
 
 ### Comandos
 
@@ -59,16 +62,7 @@ npm run lint   # checar erros de lint antes de PR
 
 ### Sobre o Tailwind v4
 
-Nao existe `tailwind.config.ts` neste projeto. Tokens ficam em `src/app/globals.css`:
-
-```css
-@theme {
-  --color-primary: #...; /* cor primaria */
-  --font-heading: var(--font-...);
-}
-```
-
-Usar `bg-primary`, `text-primary`, etc. normalmente via classes Tailwind.
+Nao existe `tailwind.config.ts` neste projeto. Tokens ficam em `src/app/globals.css`: as variaveis no `:root` (`--areia`, `--carvao`, `--laranja`...) sao usadas direto pelos CSS Modules, e o `@theme inline` aponta para elas, gerando `bg-areia`, `text-laranja` etc. para os componentes em Tailwind.
 
 ---
 
@@ -179,14 +173,14 @@ Nao e necessario invocar para:
 > Secao auto-corretiva. Adicionar regras aqui conforme erros forem encontrados ou preferencias definidas durante o desenvolvimento.
 > Formato: `N. [CATEGORIA] Sempre/Nunca faca X — porque Y.`
 
-1. [POSITIONING] Sempre falar como BPO de tecnologia, nunca como agencia de IA — o cliente terceiriza operacao continua, nao compra projeto/software.
+1. [POSITIONING] Sempre falar como software house especializada em solucoes com IA (nunca "BPO", nunca "especializada em IA" sem o "solucoes com"). CTA sempre "Comece por aqui", nunca "Comece por um diagnostico".
 2. [POSITIONING] Nunca listar modelos de engajamento (preco fixo, mensalidade, performance, escopo) no site — cortar criterios afasta leads, queremos so o positivo.
-3. [OPERACAO] Nunca prometer time alocado em dedicacao exclusiva. Pode prometer monitoramento automatico 24/7 + resposta humana priorizada para incidentes criticos, com tempos definidos em contrato.
+3. [OPERACAO] Nunca prometer time alocado em dedicacao exclusiva nem monitoramento 24/7. O que acontece depois de pronto (seguir junto ou entregar documentado) depende do contrato.
 4. [COPY] Nunca usar em-dashes (—) em texto user-facing — soa AI-written. Usar virgulas, pontos ou parenteses.
 5. [COPY] Tom: declarativo, profissional, sem girias e sem exclamacoes. Preservar termos concretos.
 6. [DESIGN] Headings ficam chapadas, sem nenhum dispositivo de enfase (sem AmberUnderline, sem squiggle, sem highlight) — o squiggle handwritten nao passa tecnologia.
-7. [DESIGN] Robo 3D Spline no Hero fica mantido — decisao do usuario. Nao propor remocao novamente sem ser pedido.
-8. [DESIGN] Animacao `ChoreographyAnimation` em Services esta dormente (nao renderizada) mas mantida no codigo pra ativacao futura. Brain animation foi removida — soava agencia de IA.
-9. [CONTEUDO] Nao criar secao Numbers / contador de metricas enquanto nao houver projetos reais entregues — qualquer claim numerico sem base soa enganoso (ex: "0 projetos sem resultado").
+7. [DESIGN] O robo 3D (Spline) saiu em 01/10/2026, a pedido do Matheus. O topo e o filme de lancamento que cresce na rolagem.
+8. [DESIGN] Evitar cara de site gerado por IA: nada de selo centralizado em caixa alta acima do titulo, palavra colorida no titulo, par de botoes primario + fantasma, cartao com brilho colorido, fundo pontilhado ou ruido.
+9. [CONTEUDO] Nao exibir numeros ou metricas de clientes sem autorizacao do cliente.
 10. [WORKFLOW] Commitar ao fim de cada bloco coerente de mudancas e seguir pra proxima tarefa. Usuario nao quer pausar pra revisar com `npm run dev` a cada batida.
-11. [ORDEM] A ordem atual da landing reflete um funil pain-led BPO. Antes de reorganizar, considerar: Hero (posicionamento) → Dores (recognize pain) → ParaQuem (recognize self) → Services (how we solve) → Process (how we work) → NaPratica (see it operating) → Seguranca (trust signals) → FAQ → CtaFinal.
+11. [ORDEM] Filme (marca) → Cases (prova) → O que fazemos → Como trabalhamos → Perguntas → Chamada final.
