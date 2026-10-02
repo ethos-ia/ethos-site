@@ -16,7 +16,7 @@
 
 ## Conta Vercel
 
-- Time da Ethos (plano Pro). Ate 01/10/2026 o projeto estava na conta pessoal do Matheus; transferencia para o time em andamento.
+- Time **Ethos AI's projects** (plano Pro). Transferido da conta pessoal do Matheus em 01/10/2026; confirmado no ar (dominio e deploy) apos a transferencia.
 
 ---
 
