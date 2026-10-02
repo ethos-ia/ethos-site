@@ -67,15 +67,22 @@ export function Topo() {
       r0 = { x: a.left - b.left, y: a.top - b.top, w: a.width, h: a.height };
       raio0 = Math.min(18, a.height * 0.14);
       celular = matchMedia("(max-width: 760px)").matches;
+      // vídeo do tamanho do palco; o tamanho na tela vem do transform em atualiza()
+      if (filme) {
+        // estilo inteiro de uma vez (medido: só largura/altura soltas não tiravam o custo)
+        filme.style.cssText = `position:absolute;left:50%;top:50%;width:${palco.clientWidth}px;height:${palco.clientHeight}px;max-width:none;object-fit:cover`;
+      }
     }
 
-    function atualiza() {
+    // Desenha o topo num ponto da trilha (p de 0 a 1)
+    function atualiza(p: number) {
       if (!r0 || !palco || !quadro || !topo || !escurece || !cant || !medida || !nota || !leitura || !som || !filme) return;
-      const p = clamp((scrollY - inicioTrilha()) / distancia());
       const e = calmo ? (p > 0.04 ? 1 : 0) : suave(clamp(p / FIM));
       const W = palco.clientWidth, H = palco.clientHeight;
       const x = lerp(r0.x, 0, e), y = lerp(r0.y, 0, e), w = lerp(r0.w, W, e), h = lerp(r0.h, H, e);
       quadro.style.cssText = `left:${x}px;top:${y}px;width:${w}px;height:${h}px;border-radius:${lerp(raio0, 0, e)}px`;
+      // o vídeo cobre o quadro só com escala (sem mudar o tamanho do elemento de vídeo)
+      filme.style.transform = `translate(-50%, -50%) scale(${Math.max(w / W, h / H)})`;
 
       // primeiro o texto sai (sobre a areia limpa); depois a sala escurece
       const saida = clamp(e / 0.16);
@@ -147,24 +154,48 @@ export function Topo() {
       rotuloSom();
     }
 
+    // O filme não copia a rolagem: desliza até ela. Sem rolagem suave (economia de energia do
+    // navegador, bateria baixa), cada clique da rodinha pula ~100 px; copiando direto, o filme
+    // pulava junto e parecia travado.
+    let mostrado = -1; // ponto da trilha desenhado agora (-1 = nada desenhado ainda)
+    let ultimoT = 0;
+    const alvo = () => clamp((scrollY - inicioTrilha()) / distancia());
+    const redesenha = () => atualiza(mostrado < 0 ? alvo() : mostrado);
+
+    function anima(t: number) {
+      pedido = 0;
+      const p = alvo();
+      if (mostrado < 0 || calmo) {
+        mostrado = p;
+      } else {
+        // 12% do caminho a cada quadro de 60 Hz (assenta em ~0,4 s), igual em qualquer taxa de quadros
+        const dt = ultimoT ? Math.min(64, t - ultimoT) : 16.67;
+        mostrado += (p - mostrado) * (1 - Math.pow(0.88, dt / 16.67));
+        if (Math.abs(p - mostrado) < 0.0005) mostrado = p;
+      }
+      atualiza(mostrado);
+      if (mostrado !== p) {
+        ultimoT = t;
+        pedido = requestAnimationFrame(anima);
+      } else {
+        ultimoT = 0;
+      }
+    }
+
     const aoRolar = () => {
-      if (pedido) return;
-      pedido = requestAnimationFrame(() => {
-        pedido = 0;
-        atualiza();
-      });
+      if (!pedido) pedido = requestAnimationFrame(anima);
     };
     const aoRedimensionar = () => {
       mede();
-      atualiza();
+      redesenha();
     };
     const aoEntrar = () => {
       perto = true;
-      atualiza();
+      redesenha();
     };
     const aoSair = () => {
       perto = false;
-      atualiza();
+      redesenha();
     };
 
     quadro.addEventListener("click", assistir);
@@ -177,7 +208,7 @@ export function Topo() {
     document.fonts.ready.then(() => {
       if (!ativo) return;
       mede();
-      atualiza();
+      aoRolar();
     });
 
     return () => {

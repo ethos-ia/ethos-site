@@ -115,10 +115,14 @@
   outline-offset: 4px;
 }
 
+/* O vídeo fica sempre do tamanho da tela (o JS fixa largura e altura) e só é escalado com transform:
+   redimensionar o elemento de vídeo a cada quadro derrubava a expansão para ~15 quadros por segundo */
 .quadro video {
+  position: absolute;
+  left: 50%;
+  top: 50%;
   display: block;
-  width: 100%;
-  height: 100%;
+  max-width: none;
   object-fit: cover;
 }
 

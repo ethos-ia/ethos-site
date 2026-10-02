@@ -3,11 +3,13 @@ import { SecTopo } from "@/components/site/SecTopo";
 import { BotaoComece } from "@/components/site/BotaoComece";
 import s from "./Cases.module.css";
 
-// Logos com a mesma massa visual: a altura sai da área (~22.000 px²) e a largura tem teto de 320 px
+// Colunas quase quadradas, logos centralizados: logos horizontais com teto de 230 px de largura;
+// o selo redondo da Evo ocupa a altura da área do logo
 const cases = [
-  { id: "parque", nome: "Parque dos Leilões", tag: "Automação com IA", w: 251, h: 88 },
-  { id: "boss", nome: "BOSS Detail", tag: "Sistema de gestão", w: 272, h: 81 },
-  { id: "espacoz", nome: "Espaço Z", tag: "IA generativa", w: 320, h: 62 },
+  { id: "parque", nome: "Parque dos Leilões", tag: "Automação com IA", w: 230, h: 80 },
+  { id: "boss", nome: "BOSS Detail", tag: "Sistema de gestão", w: 230, h: 68 },
+  { id: "espacoz", nome: "Espaço Z", tag: "IA generativa", w: 230, h: 45 },
+  { id: "evo", nome: "Evo Club", tag: "Aplicativo", w: 168, h: 168 },
 ];
 
 function Jogo() {
@@ -26,10 +28,6 @@ function Jogo() {
           <span className={s.tag}>{c.tag}</span>
         </article>
       ))}
-      <article className={`${s.case} ${s.convite}`}>
-        <p>O próximo case pode ser o seu.</p>
-        <BotaoComece variante="texto" />
-      </article>
     </>
   );
 }
@@ -51,6 +49,10 @@ export function Cases() {
             <Jogo />
           </div>
         </div>
+      </div>
+      <div className={`largura ${s.chamada}`}>
+        <p>O próximo case pode ser o seu.</p>
+        <BotaoComece variante="texto" />
       </div>
     </section>
   );

@@ -14,7 +14,7 @@
 .trilho {
   display: flex;
   width: max-content;
-  animation: desliza 66s linear infinite;
+  animation: desliza 20s linear infinite;
 }
 
 .esteira:hover .trilho {
@@ -33,17 +33,18 @@
   flex: none;
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  width: 420px;
-  padding: 4px 48px 8px;
+  align-items: center;
+  gap: 18px;
+  width: 320px;
+  padding: 8px 32px 12px;
   border-left: 1px solid var(--linha);
 }
 
 .logo {
   display: flex;
   align-items: center;
-  height: 128px;
-  margin-bottom: 12px;
+  justify-content: center;
+  height: 190px;
 }
 
 /* Logo monocromático em areia: o PNG entra só como máscara */
@@ -52,8 +53,8 @@
   width: var(--w);
   height: var(--h);
   background: var(--areia);
-  -webkit-mask: var(--logo) left center / contain no-repeat;
-  mask: var(--logo) left center / contain no-repeat;
+  -webkit-mask: var(--logo) center / contain no-repeat;
+  mask: var(--logo) center / contain no-repeat;
 }
 
 .tag {
@@ -64,20 +65,19 @@
   color: var(--laranja);
 }
 
-.convite {
-  justify-content: space-between;
-  padding: 34px 40px;
-  border-left: 0;
-  background: var(--laranja);
-  color: var(--carvao);
+/* Convite discreto abaixo da esteira (a chamada forte fica no fim da página) */
+.chamada {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 20px;
+  margin-top: 56px;
+  font-size: 17px;
+  color: var(--pedra-clara);
 }
 
-.convite p {
-  max-width: 10ch;
-  font-weight: 900;
-  font-size: 36px;
-  line-height: 1;
-  letter-spacing: -0.04em;
+.chamada button {
+  color: var(--laranja);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -88,12 +88,12 @@
 
 @media (max-width: 760px) {
   .case {
-    width: 300px;
-    padding: 4px 30px 8px;
+    width: 250px;
+    padding: 6px 24px 10px;
   }
 
   .logo {
-    height: 96px;
+    height: 140px;
   }
 
   .marca {
@@ -101,11 +101,4 @@
     height: calc(var(--h) * 0.72);
   }
 
-  .convite {
-    padding: 28px 30px;
-  }
-
-  .convite p {
-    font-size: 30px;
-  }
 }
