@@ -10,6 +10,7 @@ const cases = [
   { id: "boss", nome: "BOSS Detail", tag: "Sistema de gestão", w: 230, h: 68 },
   { id: "espacoz", nome: "Espaço Z", tag: "IA generativa", w: 230, h: 45 },
   { id: "evo", nome: "Evo Club", tag: "Aplicativo", w: 168, h: 168 },
+  { id: "voga", nome: "Voga", tag: "Aplicativo", w: 230, h: 60 },
 ];
 
 function Jogo() {
