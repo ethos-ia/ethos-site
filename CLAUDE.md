@@ -46,10 +46,10 @@ brand_assets/         — logo, paleta, tipografia (ver README la dentro)
 ### Ordem das secoes na landing (page.tsx)
 
 ```
-Topo (filme na rolagem) → Cases → OQueFazemos → ComoTrabalhamos → Perguntas → ChamadaFinal
+Topo (peça 3D) → Cases → OQueFazemos → ComoTrabalhamos → Perguntas → ChamadaFinal
 ```
 
-- **Topo:** o filme de lancamento (`public/filme/`) sai da vaga no titulo e cresce ate a tela cheia com a rolagem. Comeca mudo (navegador nao deixa tocar com som sozinho); o som liga pelo botao "Assistir com som" ou clicando no video.
+- **Topo:** titulo em HTML na frente e, por tras, o simbolo da ethos como peca 3D em WebGL puro (`src/sections/topo/Forma.tsx`, sem biblioteca). A peca muda de forma para cada frente (elos = automacao, blocos = sistemas, brilho = IA generativa) e os botoes das frentes escolhem a forma. Sem WebGL vira o simbolo chapado; com movimento reduzido fica parada. O filme (`public/filme/`) nao e mais usado no topo.
 - **Cases:** so o logo (monocromatico, areia) e a classificacao do que foi feito, sem texto nem numeros. O logo do Parque e uma reconstrucao do PNG de 200x70 px: trocar pelo vetor quando chegar.
 
 ### Comandos
@@ -179,8 +179,8 @@ Nao e necessario invocar para:
 4. [COPY] Nunca usar em-dashes (—) em texto user-facing — soa AI-written. Usar virgulas, pontos ou parenteses.
 5. [COPY] Tom: declarativo, profissional, sem girias e sem exclamacoes. Preservar termos concretos.
 6. [DESIGN] Headings ficam chapadas, sem nenhum dispositivo de enfase (sem AmberUnderline, sem squiggle, sem highlight) — o squiggle handwritten nao passa tecnologia.
-7. [DESIGN] O robo 3D (Spline) saiu em 01/10/2026, a pedido do Matheus. O topo e o filme de lancamento que cresce na rolagem.
+7. [DESIGN] O robo 3D (Spline) saiu em 01/10/2026 e o filme de lancamento saiu do topo em 13/11/2026, a pedido do Matheus. O topo e a peca 3D do simbolo (WebGL), sem indice de secoes no pe.
 8. [DESIGN] Evitar cara de site gerado por IA: nada de selo centralizado em caixa alta acima do titulo, palavra colorida no titulo, par de botoes primario + fantasma, cartao com brilho colorido, fundo pontilhado ou ruido.
 9. [CONTEUDO] Nao exibir numeros ou metricas de clientes sem autorizacao do cliente.
 10. [WORKFLOW] Commitar ao fim de cada bloco coerente de mudancas e seguir pra proxima tarefa. Usuario nao quer pausar pra revisar com `npm run dev` a cada batida.
-11. [ORDEM] Filme (marca) → Cases (prova) → O que fazemos → Como trabalhamos → Perguntas → Chamada final.
+11. [ORDEM] Topo (marca) → Cases (prova) → O que fazemos → Como trabalhamos → Perguntas → Chamada final.

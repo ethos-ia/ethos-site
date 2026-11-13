@@ -15,6 +15,8 @@
   display: flex;
   flex-direction: column;
   gap: 22px;
+  /* sem isto a linha de logos alarga a coluna além da tela no celular */
+  min-width: 0;
 }
 
 .frente h3 {
@@ -67,8 +69,11 @@
   color: var(--pedra);
 }
 
+/* Com três logos a linha não cabe no celular: eles encolhem (a máscara mantém a proporção) */
 .logo {
   display: block;
+  flex: 0 1 auto;
+  min-width: 0;
   background: var(--carvao);
   -webkit-mask: var(--logo) center / contain no-repeat;
   mask: var(--logo) center / contain no-repeat;

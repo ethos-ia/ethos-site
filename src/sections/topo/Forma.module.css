@@ -1,0 +1,60 @@
+/* A cena da peça fica atrás do texto: o título passa por cima dela.
+   No celular ela ocupa o alto da tela, sangrando para a direita. */
+.cena {
+  position: absolute;
+  z-index: 0;
+  top: 56px;
+  left: 14%;
+  right: -14%;
+  height: min(96vw, 380px);
+  pointer-events: none;
+}
+
+.tela {
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+}
+
+.pronta {
+  opacity: 1;
+}
+
+/* Sem WebGL: o símbolo chapado no lugar da peça */
+.reserva {
+  display: none;
+  position: absolute;
+  inset: 14%;
+  background: var(--laranja);
+  -webkit-mask: url("/marca/simbolo.svg") center / contain no-repeat;
+  mask: url("/marca/simbolo.svg") center / contain no-repeat;
+}
+
+.cena[data-plana] .reserva {
+  display: block;
+}
+
+.cena[data-plana] .tela {
+  display: none;
+}
+
+@media (min-width: 761px) {
+  .cena {
+    top: 24px;
+    left: 36%;
+    right: -8%;
+    height: 440px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .cena {
+    top: 0;
+    left: 44%;
+    right: -3%;
+    height: auto;
+    bottom: 0;
+  }
+}
