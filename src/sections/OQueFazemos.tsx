@@ -98,6 +98,7 @@ const frentes: { nome: string; texto: string; cena: ReactNode; cases: Case[] }[]
     cases: [
       { id: "boss", nome: "BOSS Detail", w: 132, h: 39 },
       { id: "evo", nome: "Evo Club", w: 54, h: 54 },
+      { id: "voga", nome: "Voga", w: 132, h: 34 },
     ],
   },
   {

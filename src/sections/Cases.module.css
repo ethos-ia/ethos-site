@@ -17,10 +17,6 @@
   animation: desliza 20s linear infinite;
 }
 
-.esteira:hover .trilho {
-  animation-play-state: paused;
-}
-
 @keyframes desliza {
   to { transform: translateX(calc(-100% / 3)); }
 }
